@@ -34,6 +34,19 @@ public:
 		{
 			btnCode = getch();
 		}
+
+		MenuItem item = m_menu.KeyHandler(Key(btnCode));
+
+		switch (item)
+		{
+		case MenuItem::CONTINUE:
+			break;
+		case MenuItem::NEW_GAME:
+			break;
+		case MenuItem::EXIT:
+			exit(0);
+			break;
+		}
 	}
 
 private:

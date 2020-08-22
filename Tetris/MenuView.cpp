@@ -28,3 +28,26 @@ void MenuView::Show(BaseApp * app) const
 
 	View::Show(app);
 }
+
+MenuItem MenuView::KeyHandler(const Key & key)
+{
+	switch (key)
+	{
+	case Key::UP:
+		if (m_selector > 0)
+		{
+			m_selector--;
+		}
+		break;
+	case Key::DOWN:
+		if (m_selector < m_items.size() - 1)
+		{
+			m_selector++;
+		}
+		break;
+	case Key::ENTER:
+		return MenuItem(m_selector);
+		break;
+	}
+	return MenuItem::NONE;
+}
