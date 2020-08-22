@@ -2,12 +2,16 @@
 
 #include "TestApp.h"
 #include "../View.h"
+#include "../MenuView.h"
 #include <conio.h>
 
 class GameApp : public BaseApp
 {
 public:
-	GameApp(const int w, const int h) : BaseApp(w, h), m_view(w, h)
+	GameApp(const int w, const int h) 
+		: BaseApp(w, h), 
+		m_view(w, h),
+		m_menu(w, h)
 	{
 		CONSOLE_SCREEN_BUFFER_INFOEX csbiex;
 		csbiex.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
@@ -19,9 +23,9 @@ public:
 
 	void UpdateF(float deltaTime) final
 	{
-		m_view.Clear(this);
-		m_view.ShowText(1, 1, L"some string", this);
-		m_view.Show(this);
+		m_menu.Clear(this);
+
+		m_menu.Show(this);
 	}
 
 	void KeyPressed(int btnCode) final
@@ -34,6 +38,7 @@ public:
 
 private:
 	View m_view;
+	MenuView m_menu;
 };
 
 void main ()
