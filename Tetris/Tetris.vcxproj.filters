@@ -11,24 +11,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\ConsolEngine\BaseApp.cpp">
+    <ClCompile Include="View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\ConsolEngine\main.cpp">
+    <ClCompile Include="ConsolEngine\BaseApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\ConsolEngine\TestApp.cpp">
+    <ClCompile Include="ConsolEngine\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsolEngine\TestApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ConsolEngine\BaseApp.h">
+    <ClInclude Include="View.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\ConsolEngine\PerformanceCounter.h">
+    <ClInclude Include="ConsolEngine\BaseApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\ConsolEngine\TestApp.h">
+    <ClInclude Include="ConsolEngine\PerformanceCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsolEngine\TestApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

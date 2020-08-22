@@ -143,14 +143,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\ConsolEngine\BaseApp.cpp" />
-    <ClCompile Include="..\ConsolEngine\main.cpp" />
-    <ClCompile Include="..\ConsolEngine\TestApp.cpp" />
+    <ClCompile Include="ConsolEngine\BaseApp.cpp" />
+    <ClCompile Include="ConsolEngine\main.cpp" />
+    <ClCompile Include="ConsolEngine\TestApp.cpp" />
+    <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ConsolEngine\BaseApp.h" />
-    <ClInclude Include="..\ConsolEngine\PerformanceCounter.h" />
-    <ClInclude Include="..\ConsolEngine\TestApp.h" />
+    <ClInclude Include="ConsolEngine\BaseApp.h" />
+    <ClInclude Include="ConsolEngine\PerformanceCounter.h" />
+    <ClInclude Include="ConsolEngine\TestApp.h" />
+    <ClInclude Include="View.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
