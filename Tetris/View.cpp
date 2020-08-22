@@ -33,3 +33,11 @@ void View::Clear(BaseApp * app) const
 		}
 	}
 }
+
+void View::ShowText(const int x, const int y, const std::wstring & text, BaseApp * app) const
+{
+	for (size_t i = 0; i < text.length(); ++i)
+	{
+		app->SetChar(x + i, y, text.at(i));
+	}
+}

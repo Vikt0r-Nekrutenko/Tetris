@@ -20,6 +20,7 @@ public:
 	void UpdateF(float deltaTime) final
 	{
 		m_view.Clear(this);
+		m_view.ShowText(1, 1, L"some string", this);
 		m_view.Show(this);
 	}
 
