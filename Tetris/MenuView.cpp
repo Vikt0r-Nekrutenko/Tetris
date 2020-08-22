@@ -1,5 +1,5 @@
 #include "MenuView.h"
-
+#include "ConsolEngine\BaseApp.h"
 
 
 MenuView::MenuView(const int w, const int h)
@@ -19,6 +19,12 @@ void MenuView::Show(BaseApp * app) const
 
 		offset_y += 2;
 	}
+
+	int lselector_x = (m_width >> 1) - (m_items.at(m_selector).length() >> 1) - 2;
+	app->SetChar(lselector_x, 8 + m_selector * 2, wchar_t(Particle::LSELECTOR));
+	
+	int rselector_x = lselector_x + m_items.at(m_selector).length() + 3;
+	app->SetChar(rselector_x, 8 + m_selector * 2, wchar_t(Particle::RSELECTOR));
 
 	View::Show(app);
 }

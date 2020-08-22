@@ -4,10 +4,12 @@
 
 enum class Particle
 {
-	BORDER = L'\u2591',
-	BRICK  = L'\u25d9',
-	SPACE  = L'\x20',
-	CELL   = L'\u00b7',
+	BORDER	 = L'\u2591',
+	BRICK	 = L'\u25d9',
+	SPACE	 = L'\x20',
+	CELL	 = L'\u00b7',
+	LSELECTOR = L'\u25ba',
+	RSELECTOR = L'\u25c4',
 };
 
 class BaseApp;

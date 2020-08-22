@@ -11,5 +11,6 @@ public:
 	void Show(BaseApp *app) const final;
 private:
 	std::vector<std::wstring> m_items;
+	int m_selector = 0;
 };
 
