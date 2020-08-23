@@ -50,7 +50,7 @@ public:
 
 	State Update(const float deltaTime);
 private:
-	bool MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
+	bool MoveIsPossible(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
 
 	std::vector<const TetrominoCreator *> m_creators;
 	Well m_well;

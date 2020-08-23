@@ -19,6 +19,7 @@ public:
 		m_endView(&m_model, w, h),
 		m_currentView(&m_menuView)
 	{
+		// next crutch resolve the error #87 when call base app constructor
 		CONSOLE_SCREEN_BUFFER_INFOEX csbiex;
 		csbiex.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
 		GetConsoleScreenBufferInfoEx(GetStdHandle(STD_OUTPUT_HANDLE), &csbiex);

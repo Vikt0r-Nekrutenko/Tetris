@@ -47,7 +47,8 @@ void GameModel::KeyHandler(const Key & key)
 	switch (key)
 	{
 	case Key::LEFT:
-		if (MotionIsValid([](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
+		if (MoveIsPossible([](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) 
+		{
 			newBricksPositions.push_back(brick + Vec2d(-1, 0));
 		}) == true)
 		{
@@ -56,7 +57,8 @@ void GameModel::KeyHandler(const Key & key)
 		break;
 
 	case Key::RIGHT:
-		if (MotionIsValid([](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
+		if (MoveIsPossible([](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) 
+		{
 			newBricksPositions.push_back(brick + Vec2d(+1, 0));
 		}) == true)
 		{
@@ -69,11 +71,14 @@ void GameModel::KeyHandler(const Key & key)
 		break;
 
 	case Key::SPACE:
-		if (MotionIsValid([this](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
-			newBricksPositions.push_back(brick.Rotate(GetCurrentTetromino()->GetBricks().at(1), GetCurrentTetromino()->GetRotationAngle()));
+		const Vec2d origin = m_currentTetromino->GetBricks().at(1);
+		const float angle = m_currentTetromino->GetRotationAngle();
+		if (MoveIsPossible([origin, angle](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) 
+		{
+			newBricksPositions.push_back(brick.Rotate(origin, angle));
 		}) == true)
 		{
-			m_currentTetromino->Rotate(m_currentTetromino->GetBricks().at(1));
+			m_currentTetromino->Rotate(origin);
 		}
 		break;
 	}
@@ -81,13 +86,13 @@ void GameModel::KeyHandler(const Key & key)
 
 State GameModel::Update(const float deltaTime)
 {
-	float &factor = m_factor;
-	if (MotionIsValid([this, deltaTime, factor](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
-		int newBrickY = GetCurrentTetromino()->GetRealY() + GetCurrentTetromino()->GetDownVelocity() * deltaTime * factor;
+	int newBrickY = m_currentTetromino->GetRealY() + m_currentTetromino->GetDownVelocity() * deltaTime * m_factor;
+	if (MoveIsPossible([newBrickY](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) 
+	{
 		newBricksPositions.push_back(brick + Vec2d(0, newBrickY));
 	}) == true)
 	{
-		m_currentTetromino->MoveDown(deltaTime * factor);
+		m_currentTetromino->MoveDown(deltaTime * m_factor);
 		m_score -= m_score > 0 ? SCORE_DECREASE_SPEED * deltaTime : 0.f;
 	}
 	else 
@@ -122,7 +127,9 @@ State GameModel::Update(const float deltaTime)
 	return State::NONE;
 }
 
-bool GameModel::MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const
+/* NOTE: New bricks will be spawned twice: in MoveIsPossible and currentTetramino-> MoveAnywhere */
+
+bool GameModel::MoveIsPossible(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const
 {
 	std::vector<Vec2d> newBrickPositions;
 
