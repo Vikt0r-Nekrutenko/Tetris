@@ -66,11 +66,6 @@ private:
 
 void main ()
 {
-	//GameApp app(25, 26);
-	//app.Run();
-
-	Vec2d v1(0, 0), v2(1,1);
-	std::cout << (v1 == v2) << std::endl;
-
-	std::cout << v2.Rotate(v1, 1.57f).x << " " << v2.y << std::endl;
+	GameApp app(25, 26);
+	app.Run();
 }

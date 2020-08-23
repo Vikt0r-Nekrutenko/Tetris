@@ -149,6 +149,7 @@
     <ClCompile Include="GameModel.cpp" />
     <ClCompile Include="GameView.cpp" />
     <ClCompile Include="MenuView.cpp" />
+    <ClCompile Include="Tetromino.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="GameView.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="MenuView.h" />
+    <ClInclude Include="Tetromino.h" />
     <ClInclude Include="Vec2d.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>

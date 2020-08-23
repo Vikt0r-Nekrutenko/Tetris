@@ -1,12 +1,14 @@
 #pragma once
+
+#include "Tetromino.h"
+
 class GameModel
 {
 public:
 	GameModel(const int w, const int h);
 	~GameModel();
 
-	const int m_width;
-	const int m_height;
+	const Vec2d m_size;
 
 	inline float GetScore() const
 	{
@@ -22,9 +24,15 @@ public:
 	{
 		return m_lines;
 	}
+
+	inline const Tetromino *GetCurrentTetromino() const
+	{
+		return m_currentTetromino;
+	}
 private:
+	Tetromino *m_currentTetromino = nullptr;
 	float m_score = 0.f;
 	int m_level = 1;
-	int m_lines = 1;
+	int m_lines = 0;
 };
 
