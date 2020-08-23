@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Tetromino.h"
+#include "Keys.h"
 
 class GameModel
 {
@@ -29,6 +30,8 @@ public:
 	{
 		return m_currentTetromino;
 	}
+
+	void KeyHandler(const Key &key);
 private:
 	Tetromino *m_currentTetromino = nullptr;
 	float m_score = 0.f;

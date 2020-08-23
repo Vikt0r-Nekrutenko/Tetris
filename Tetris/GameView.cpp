@@ -70,5 +70,7 @@ State GameView::KeyHandler(const Key & key)
 		return State::PAUSE;
 		break;
 	}
+
+	m_model->KeyHandler(key);
 	return State::NONE;
 }

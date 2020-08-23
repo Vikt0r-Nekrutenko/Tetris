@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 #include "Vec2d.h"
 
 class Tetromino
@@ -12,6 +13,22 @@ public:
 	inline const std::vector<Vec2d> &GetBricks() const
 	{
 		return m_bricks;
+	}
+
+	void MoveLeft()
+	{
+		for (Vec2d &brick : m_bricks)
+		{
+			brick.x--;
+		}
+	}
+
+	void MoveRight()
+	{
+		for (Vec2d &brick : m_bricks)
+		{
+			brick.x++;
+		}
 	}
 private:
 	std::vector<Vec2d> m_bricks;

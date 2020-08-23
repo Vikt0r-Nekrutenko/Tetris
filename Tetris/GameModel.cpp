@@ -10,3 +10,17 @@ GameModel::~GameModel()
 {
 	delete m_currentTetromino;
 }
+
+void GameModel::KeyHandler(const Key & key)
+{
+	switch (key)
+	{
+	case Key::LEFT:
+		m_currentTetromino->MoveLeft();
+		break;
+
+	case Key::RIGHT:
+		m_currentTetromino->MoveRight();
+		break;
+	}
+}
