@@ -30,6 +30,11 @@ public:
 		return m_realY;
 	}
 
+	inline void IncreaseVelocity()
+	{
+		m_downVelocity = 15.f;
+	}
+
 	void MoveLeft()
 	{
 		for (Vec2d &brick : m_bricks)

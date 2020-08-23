@@ -34,6 +34,10 @@ void GameModel::KeyHandler(const Key & key)
 		}
 		break;
 
+	case Key::DOWN:
+		m_currentTetromino->IncreaseVelocity();
+		break;
+
 	case Key::SPACE:
 		if (MotionIsValid([this](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
 			newBricksPositions.push_back(brick.Rotate(GetCurrentTetromino()->GetBricks().at(1), GetCurrentTetromino()->GetRotationAngle()));
@@ -64,6 +68,8 @@ void GameModel::Update(const float deltaTime)
 		delete m_currentTetromino;
 
 		m_currentTetromino = new JTetromino(Vec2d(m_size.x / 2, 0));
+
+		m_lines += m_well.CleanFilledLines();
 	}
 }
 

@@ -16,7 +16,7 @@ public:
 	}
 
 	void PlaceBrick(const Vec2d &brick);
-
+	int CleanFilledLines();
 private:
 	std::list<Vec2d> m_bricks;
 };
