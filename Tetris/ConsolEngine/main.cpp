@@ -11,7 +11,8 @@ public:
 	GameApp(const int w, const int h) 
 		: BaseApp(w, h), 
 		m_view(w, h),
-		m_menu(w, h)
+		m_menu(w, h),
+		m_currentView(&m_menu)
 	{
 		CONSOLE_SCREEN_BUFFER_INFOEX csbiex;
 		csbiex.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
@@ -23,9 +24,8 @@ public:
 
 	void UpdateF(float deltaTime) final
 	{
-		m_menu.Clear(this);
-
-		m_menu.Show(this);
+		m_currentView->Clear(this);
+		m_currentView->Show(this);
 	}
 
 	void KeyPressed(int btnCode) final
@@ -35,16 +35,21 @@ public:
 			btnCode = getch();
 		}
 
-		MenuItem item = m_menu.KeyHandler(Key(btnCode));
+		State state = m_currentView->KeyHandler(Key(btnCode));
 
-		switch (item)
+		switch (state)
 		{
-		case MenuItem::CONTINUE:
+		case State::CONTINUE:
+			
 			break;
-		case MenuItem::NEW_GAME:
+		case State::NEW_GAME:
+			m_currentView = &m_view;
 			break;
-		case MenuItem::EXIT:
+		case State::EXIT:
 			exit(0);
+			break;
+		case State::PAUSE:
+			m_currentView = &m_menu;
 			break;
 		}
 	}
@@ -52,6 +57,7 @@ public:
 private:
 	View m_view;
 	MenuView m_menu;
+	View* m_currentView;
 };
 
 void main ()

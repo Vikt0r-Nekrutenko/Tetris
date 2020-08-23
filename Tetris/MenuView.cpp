@@ -29,7 +29,7 @@ void MenuView::Show(BaseApp * app) const
 	View::Show(app);
 }
 
-MenuItem MenuView::KeyHandler(const Key & key)
+State MenuView::KeyHandler(const Key & key)
 {
 	switch (key)
 	{
@@ -46,8 +46,8 @@ MenuItem MenuView::KeyHandler(const Key & key)
 		}
 		break;
 	case Key::ENTER:
-		return MenuItem(m_selector);
+		return State(m_selector);
 		break;
 	}
-	return MenuItem::NONE;
+	return State::NONE;
 }

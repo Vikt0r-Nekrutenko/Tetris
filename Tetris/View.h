@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Keys.h"
 
 enum class Particle
 {
@@ -10,6 +11,15 @@ enum class Particle
 	CELL	 = L'\u00b7',
 	LSELECTOR = L'\u25ba',
 	RSELECTOR = L'\u25c4',
+};
+
+enum class State
+{
+	NONE	 = 0xff,
+	CONTINUE = 0x00,
+	NEW_GAME = 0x01,
+	EXIT	 = 0x02,
+	PAUSE	 = 0x03,
 };
 
 class BaseApp;
@@ -24,6 +34,7 @@ public:
 	virtual void Clear(BaseApp *app) const;
 
 	void ShowText(const int x, const int y, const std::wstring &text, BaseApp *app) const;
+	virtual State KeyHandler(const Key &key) { return State::NONE; };
 protected:
 	const int m_width;
 	const int m_height;
