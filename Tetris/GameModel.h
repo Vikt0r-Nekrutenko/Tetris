@@ -2,6 +2,7 @@
 
 #include "Tetromino.h"
 #include "Keys.h"
+#include "Well.h"
 
 class GameModel
 {
@@ -31,12 +32,18 @@ public:
 		return m_currentTetromino;
 	}
 
+	inline const Well &GetWell() const
+	{
+		return m_well;
+	}
+
 	void KeyHandler(const Key &key);
 
 	void Update(const float deltaTime);
 private:
 	bool MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
 
+	Well m_well;
 	Tetromino *m_currentTetromino = nullptr;
 	float m_score = 0.f;
 	int m_level = 1;

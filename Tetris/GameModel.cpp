@@ -1,7 +1,8 @@
 #include "GameModel.h"
 
 GameModel::GameModel(const int w, const int h)
-	: m_size(w, h)
+	: m_size(w, h),
+	m_well(Vec2d(w, h))
 {
 	m_currentTetromino = new JTetromino(Vec2d(w / 2, 0));
 }
@@ -52,6 +53,17 @@ void GameModel::Update(const float deltaTime)
 	}) == true)
 	{
 		m_currentTetromino->MoveDown(deltaTime);
+	}
+	else 
+	{
+		for (const Vec2d &brick : m_currentTetromino->GetBricks())
+		{
+			m_well.PlaceBrick(brick);
+		}
+
+		delete m_currentTetromino;
+
+		m_currentTetromino = new JTetromino(Vec2d(m_size.x / 2, 0));
 	}
 }
 

@@ -32,7 +32,10 @@
     <ClCompile Include="GameModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tetramino.cpp">
+    <ClCompile Include="Tetromino.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Well.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,7 +67,10 @@
     <ClInclude Include="Vec2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tetramino.h">
+    <ClInclude Include="Tetromino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Well.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

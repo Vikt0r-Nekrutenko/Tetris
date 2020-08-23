@@ -19,6 +19,10 @@ void GameView::Show(BaseApp * app) const
 		}
 	}
 
+	for (const Vec2d &brick : m_model->GetWell().GetBricks())
+	{
+		app->SetChar(brick.x + 1, brick.y + 1, wchar_t(Particle::BRICK));
+	}
 
 	for (int y = 0; y < m_height; ++y)
 	{
