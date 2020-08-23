@@ -79,6 +79,14 @@ bool GameModel::MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec
 		{
 			return false;
 		}
+
+		for (const Vec2d &brick : m_well.GetBricks())
+		{
+			if (newBrickPositions.back() == brick)
+			{
+				return false;
+			}
+		}
 	}
 	return true;
 }
