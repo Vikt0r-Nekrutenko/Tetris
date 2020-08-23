@@ -4,7 +4,7 @@ GameModel::GameModel(const int w, const int h)
 	: m_size(w, h),
 	m_well(Vec2d(w, h))
 {
-	m_currentTetromino = new JTetromino(Vec2d(w / 2, 0));
+	m_currentTetromino = new STetromino(Vec2d(w / 2, 0));
 }
 
 GameModel::~GameModel()

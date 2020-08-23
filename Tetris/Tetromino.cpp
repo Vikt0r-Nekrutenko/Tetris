@@ -6,24 +6,75 @@ Tetromino::Tetromino(const Vec2d & b1, const Vec2d & b2, const Vec2d & b3, const
 
 }
 
+void Tetromino::MoveLeft()
+{
+	for (Vec2d &brick : m_bricks)
+	{
+		brick.x--;
+	}
+}
+
+void Tetromino::MoveRight()
+{
+	for (Vec2d &brick : m_bricks)
+	{
+		brick.x++;
+	}
+}
+
+void Tetromino::MoveDown(const float deltaTime)
+{
+	m_realY += m_downVelocity * deltaTime;
+
+	if (m_realY >= 1.f)
+	{
+		for (Vec2d &brick : m_bricks)
+		{
+			brick.y++;
+		}
+		m_realY = 0.f;
+	}
+}
+
+void Tetromino::Rotate(const Vec2d & origin)
+{
+	for (Vec2d &brick : m_bricks)
+	{
+		brick = brick.Rotate(origin, m_rotationAngle);
+	}
+}
+
 JTetromino::JTetromino(const Vec2d & offset)
 	: Tetromino(Vec2d(1, 0) + offset, Vec2d(1, 1) + offset, Vec2d(1, 2) + offset, Vec2d(0, 2) + offset)
 {
-
 }
 
-TetrominoCreator::TetrominoCreator(const Vec2d offset)
-	: m_offset(offset)
+LTetromino::LTetromino(const Vec2d & offset)
+	: Tetromino(Vec2d(0, 0) + offset, Vec2d(0, 1) + offset, Vec2d(0, 2) + offset, Vec2d(1, 2) + offset)
 {
 }
 
-JTetrominoCreator::JTetrominoCreator(const int offsetX)
-	: TetrominoCreator(Vec2d(offsetX, 0))
+ITetromino::ITetromino(const Vec2d & offset)
+	: Tetromino(Vec2d(0, 0) + offset, Vec2d(0, 1) + offset, Vec2d(0, 2) + offset, Vec2d(0, 3) + offset)
 {
-
 }
 
-Tetromino * JTetrominoCreator::Create() const
+TTetromino::TTetromino(const Vec2d & offset)
+	: Tetromino(Vec2d(0, 0) + offset, Vec2d(1, 0) + offset, Vec2d(1, 1) + offset, Vec2d(2, 0) + offset)
 {
-	return new JTetromino(m_offset);
+}
+
+OTetromino::OTetromino(const Vec2d & offset)
+	: Tetromino(Vec2d(0, 0) + offset, Vec2d(0, 1) + offset, Vec2d(1, 0) + offset, Vec2d(1, 1) + offset)
+{
+}
+
+ZTetromino::ZTetromino(const Vec2d & offset)
+	: Tetromino(Vec2d(0, 0) + offset, Vec2d(1, 0) + offset, Vec2d(1, 1) + offset, Vec2d(2, 1) + offset)
+{
+}
+
+STetromino::STetromino(const Vec2d & offset)
+	: Tetromino(Vec2d(2, 0) + offset, Vec2d(1, 0) + offset, Vec2d(1, 1) + offset, Vec2d(0, 1) + offset)
+{
 }

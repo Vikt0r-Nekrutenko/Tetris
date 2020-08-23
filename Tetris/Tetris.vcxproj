@@ -150,6 +150,7 @@
     <ClCompile Include="GameView.cpp" />
     <ClCompile Include="MenuView.cpp" />
     <ClCompile Include="Tetromino.cpp" />
+    <ClCompile Include="TetrominoCreator.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="Well.cpp" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="Keys.h" />
     <ClInclude Include="MenuView.h" />
     <ClInclude Include="Tetromino.h" />
+    <ClInclude Include="TetrominoCreator.h" />
     <ClInclude Include="Vec2d.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="Well.h" />

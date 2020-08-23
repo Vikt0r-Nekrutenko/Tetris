@@ -35,43 +35,14 @@ public:
 		m_downVelocity = 15.f;
 	}
 
-	void MoveLeft()
-	{
-		for (Vec2d &brick : m_bricks)
-		{
-			brick.x--;
-		}
-	}
+	void MoveLeft();
 
-	void MoveRight()
-	{
-		for (Vec2d &brick : m_bricks)
-		{
-			brick.x++;
-		}
-	}
+	void MoveRight();
 
-	void MoveDown(const float deltaTime)
-	{
-		m_realY += m_downVelocity * deltaTime;
+	void MoveDown(const float deltaTime);
 
-		if (m_realY >= 1.f)
-		{
-			for (Vec2d &brick : m_bricks)
-			{
-				brick.y++;
-			}
-			m_realY = 0.f;
-		}
-	}
+	virtual void Rotate(const Vec2d &origin);
 
-	virtual void Rotate(const Vec2d &origin)
-	{
-		for (Vec2d &brick : m_bricks)
-		{
-			brick = brick.Rotate(origin, m_rotationAngle);
-		}
-	}
 protected:
 	float m_rotationAngle = 1.57f;
 	float m_downVelocity = 1.5f;
@@ -88,19 +59,38 @@ public:
 	JTetromino(const Vec2d &offset);
 };
 
-class TetrominoCreator
+class LTetromino : public Tetromino
 {
 public:
-	TetrominoCreator(const Vec2d offset);
-
-	virtual Tetromino *Create() const = 0;
-protected:
-	const Vec2d m_offset;
+	LTetromino(const Vec2d &offset);
 };
 
-class JTetrominoCreator : public TetrominoCreator
+class ITetromino : public Tetromino
 {
 public:
-	JTetrominoCreator(const int offsetX);
-	Tetromino *Create() const final;
+	ITetromino(const Vec2d &offset);
+};
+
+class TTetromino : public Tetromino
+{
+public:
+	TTetromino(const Vec2d &offset);
+};
+
+class OTetromino : public Tetromino
+{
+public:
+	OTetromino(const Vec2d &offset);
+};
+
+class ZTetromino : public Tetromino
+{
+public:
+	ZTetromino(const Vec2d &offset);
+};
+
+class STetromino : public Tetromino
+{
+public:
+	STetromino(const Vec2d &offset);
 };
