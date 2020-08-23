@@ -36,6 +36,7 @@ public:
 	virtual State KeyHandler(const Key &key) = 0;
 
 	void ShowText(const int x, const int y, const std::wstring &text, BaseApp *app) const;
+	void ShowNumber(const int cx, const int y, const int number, BaseApp *app) const;
 protected:
 	const int m_width;
 	const int m_height;

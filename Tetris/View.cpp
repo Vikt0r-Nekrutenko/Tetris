@@ -41,3 +41,9 @@ void View::ShowText(const int x, const int y, const std::wstring & text, BaseApp
 		app->SetChar(x + i, y, text.at(i));
 	}
 }
+
+void View::ShowNumber(const int cx, const int y, const int number, BaseApp * app) const
+{
+	std::wstring numberView = std::to_wstring(number);
+	ShowText(cx - (numberView.length() >> 1), y, numberView, app);
+}

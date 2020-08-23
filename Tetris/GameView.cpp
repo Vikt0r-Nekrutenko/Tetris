@@ -25,26 +25,17 @@ void GameView::Show(BaseApp * app) const
 	}
 
 	const int info_x = m_model->m_width + 3;
-	ShowText(info_x + 2, 2, L"\u25d9",app);
-	ShowText(info_x + 2, 3, L"\u25d9",app);
-	ShowText(info_x + 2, 4, L"\u25d9", app);
-	ShowText(info_x + 2, 5, L"\u25d9", app);
+	// show next tetramino
 
 	const int infoCenterX = m_model->m_width + ((m_width - m_model->m_width) >> 1);
 	ShowText(info_x, 9, L"Score", app);
-	std::wstring scoreView = std::to_wstring(int(m_model->GetScore()));
-	ShowText(infoCenterX - (scoreView.length() >> 1), 11, scoreView, app);
+	ShowNumber(infoCenterX, 11, int(m_model->GetScore()), app);
 
 	ShowText(info_x, 15, L"Level", app);
-	std::wstring levelView = std::to_wstring(int(m_model->GetLevel()));
-	ShowText(infoCenterX - (levelView.length() >> 1), 17, levelView, app);
+	ShowNumber(infoCenterX, 17, int(m_model->GetLevel()), app);
 
 	ShowText(info_x, 21, L"Lines", app);
-	std::wstring linesView = std::to_wstring(int(m_model->GetLines()));
-	ShowText(infoCenterX - (linesView.length() >> 1), 23, linesView, app);
-
-	ShowText(1, 1, L"O", app);
-	ShowText(m_model->m_width, m_model->m_height, L"O", app);
+	ShowNumber(infoCenterX, 23, int(m_model->GetLines()), app);
 
 	View::Show(app);
 }
