@@ -14,37 +14,34 @@ void GameView::Show(BaseApp * app) const
 	for (int y = 0; y < m_height; ++y)
 	{
 		app->SetChar(m_model->m_width + 1, y, wchar_t(Particle::BORDER));
+
+		if (y == 7 || y == 13 || y == 19)
+		{
+			for (int x = m_model->m_width + 1; x < m_width; ++x)
+			{
+				app->SetChar(x, y, wchar_t(Particle::BORDER));
+			}
+		}
 	}
 
-	int info_x = m_model->m_width + 3;
+	const int info_x = m_model->m_width + 3;
 	ShowText(info_x + 2, 2, L"\u25d9",app);
 	ShowText(info_x + 2, 3, L"\u25d9",app);
 	ShowText(info_x + 2, 4, L"\u25d9", app);
 	ShowText(info_x + 2, 5, L"\u25d9", app);
 
-	for (int x = m_model->m_width + 1; x < m_width; ++x)
-	{
-		app->SetChar(x, 7, wchar_t(Particle::BORDER));
-	}
-
+	const int infoCenterX = m_model->m_width + ((m_width - m_model->m_width) >> 1);
 	ShowText(info_x, 9, L"Score", app);
-	ShowText(info_x, 11, L"12032", app);
-
-	for (int x = m_model->m_width + 1; x < m_width; ++x)
-	{
-		app->SetChar(x, 13, wchar_t(Particle::BORDER));
-	}
+	std::wstring scoreView = std::to_wstring(int(m_model->GetScore()));
+	ShowText(infoCenterX - (scoreView.length() >> 1), 11, scoreView, app);
 
 	ShowText(info_x, 15, L"Level", app);
-	ShowText(info_x, 17, L"12", app);
-
-	for (int x = m_model->m_width + 1; x < m_width; ++x)
-	{
-		app->SetChar(x, 19, wchar_t(Particle::BORDER));
-	}
+	std::wstring levelView = std::to_wstring(int(m_model->GetLevel()));
+	ShowText(infoCenterX - (levelView.length() >> 1), 17, levelView, app);
 
 	ShowText(info_x, 21, L"Lines", app);
-	ShowText(info_x, 23, L"124", app);
+	std::wstring linesView = std::to_wstring(int(m_model->GetLines()));
+	ShowText(infoCenterX - (linesView.length() >> 1), 23, linesView, app);
 
 	ShowText(1, 1, L"O", app);
 	ShowText(m_model->m_width, m_model->m_height, L"O", app);
