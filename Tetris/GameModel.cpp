@@ -18,6 +18,7 @@ GameModel::GameModel(const int w, const int h)
 	};
 	std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
 	m_currentTetromino = m_creators.back()->Create();
+	m_nextTetromino = m_creators.front()->Create();
 }
 
 GameModel::~GameModel()
@@ -85,7 +86,8 @@ void GameModel::Update(const float deltaTime)
 
 		delete m_currentTetromino;
 
-		m_currentTetromino = m_creators.front()->Create();
+		m_currentTetromino = std::move(m_nextTetromino); 
+		m_nextTetromino = m_creators.front()->Create();
 		std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
 
 		m_lines += m_well.CleanFilledLines();

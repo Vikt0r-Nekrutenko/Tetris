@@ -34,6 +34,11 @@ public:
 		return m_currentTetromino;
 	}
 
+	inline const Tetromino *GetNextTetromino() const
+	{
+		return m_nextTetromino;
+	}
+
 	inline const Well &GetWell() const
 	{
 		return m_well;
@@ -52,6 +57,7 @@ private:
 	std::mt19937 m_engine;
 	
 	Tetromino *m_currentTetromino = nullptr;
+	Tetromino *m_nextTetromino = nullptr;
 
 	float m_score = 0.f;
 	int m_level = 1;

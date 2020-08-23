@@ -37,9 +37,16 @@ void GameView::Show(BaseApp * app) const
 		}
 	}
 
-	const int info_x = m_model->m_size.x + 3;
-	// show next tetramino
+	if (m_model->GetNextTetromino() != nullptr)
+	{
+		const int offsetX = m_model->m_size.x - 1;
+		for (const Vec2d &brick : m_model->GetNextTetromino()->GetBricks())
+		{
+			app->SetChar(brick.x + offsetX, brick.y + 2, wchar_t(Particle::BRICK));
+		}
+	}
 
+	const int info_x = m_model->m_size.x + 3;
 	const int infoCenterX = m_model->m_size.x + ((m_width - m_model->m_size.x) >> 1);
 	ShowText(info_x, 9, L"Score", app);
 	ShowNumber(infoCenterX, 11, int(m_model->GetScore()), app);
@@ -61,7 +68,10 @@ void GameView::Clear(BaseApp * app) const
 	{
 		for (int x = 1; x < m_model->m_size.x + 1; ++x)
 		{
-			app->SetChar(x, y, wchar_t(Particle::CELL));
+			if (x % 2 == 0)
+			{
+				app->SetChar(x, y, wchar_t(Particle::CELL));
+			}
 		}
 	}
 }
