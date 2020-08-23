@@ -33,6 +33,8 @@ public:
 
 	void KeyHandler(const Key &key);
 private:
+	bool MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
+
 	Tetromino *m_currentTetromino = nullptr;
 	float m_score = 0.f;
 	int m_level = 1;

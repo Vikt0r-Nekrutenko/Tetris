@@ -16,11 +16,41 @@ void GameModel::KeyHandler(const Key & key)
 	switch (key)
 	{
 	case Key::LEFT:
-		m_currentTetromino->MoveLeft();
+		if (MotionIsValid([](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
+			newBricksPositions.push_back(brick + Vec2d(-1, 0));
+		}) == true)
+		{
+			m_currentTetromino->MoveLeft();
+		}
 		break;
 
 	case Key::RIGHT:
-		m_currentTetromino->MoveRight();
+		if (MotionIsValid([](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
+			newBricksPositions.push_back(brick + Vec2d(+1, 0));
+		}) == true)
+		{
+			m_currentTetromino->MoveRight();
+		}
+		break;
+
+	case Key::SPACE:
+		// rotate tetromino
 		break;
 	}
+}
+
+bool GameModel::MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const
+{
+	std::vector<Vec2d> newBrickPositions;
+
+	for (const Vec2d &brick : m_currentTetromino->GetBricks())
+	{
+		motionFunction(newBrickPositions, brick);
+
+		if (newBrickPositions.back().x < 0 || newBrickPositions.back().y < 0 || newBrickPositions.back().x >= m_size.x || newBrickPositions.back().y >= m_size.y)
+		{
+			return false;
+		}
+	}
+	return true;
 }

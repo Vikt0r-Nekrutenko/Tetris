@@ -29,7 +29,7 @@ struct Vec2d
 		return std::abs(z.x) < 1 && std::abs(z.y) < 1;
 	}
 
-	Vec2d &Rotate(const Vec2d &origin, const float angle)
+	Vec2d Rotate(const Vec2d &origin, const float angle) const
 	{
 		float s = std::sin(angle);
 		float c = std::cos(angle);
@@ -38,10 +38,7 @@ struct Vec2d
 		float newX = noOffset.x * c - noOffset.y * s;
 		float newY = noOffset.x * s + noOffset.y * c;
 
-		x = noOffset.x + int(std::lround(newX));
-		y = noOffset.y + int(std::lround(newY));
-
-		return *this;
+		return Vec2d(noOffset.x + int(std::lround(newX)), noOffset.y + int(std::lround(newY)));
 	}
 };
 
