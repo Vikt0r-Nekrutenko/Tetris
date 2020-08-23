@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Tetromino.h"
+#include "TetrominoCreator.h"
 #include "Keys.h"
 #include "Well.h"
+
+#include <random>
 
 class GameModel
 {
@@ -43,8 +45,14 @@ public:
 private:
 	bool MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
 
+	std::vector<const TetrominoCreator *> m_creators;
 	Well m_well;
+
+	std::random_device m_device;
+	std::mt19937 m_engine;
+	
 	Tetromino *m_currentTetromino = nullptr;
+
 	float m_score = 0.f;
 	int m_level = 1;
 	int m_lines = 0;

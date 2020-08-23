@@ -1,14 +1,32 @@
 #include "GameModel.h"
+#include <algorithm>
 
 GameModel::GameModel(const int w, const int h)
 	: m_size(w, h),
-	m_well(Vec2d(w, h))
+	m_well(Vec2d(w, h)),
+	m_engine(m_device())
 {
-	m_currentTetromino = new STetromino(Vec2d(w / 2, 0));
+	int offsetX = w >> 1;
+	m_creators = { 
+		new JTetrominoCreator(offsetX), 
+		new LTetrominoCreator(offsetX),
+		new TTetrominoCreator(offsetX),
+		new OTetrominoCreator(offsetX),
+		new ITetrominoCreator(offsetX),
+		new ZTetrominoCreator(offsetX),
+		new STetrominoCreator(offsetX)
+	};
+	std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
+	m_currentTetromino = m_creators.back()->Create();
 }
 
 GameModel::~GameModel()
 {
+	for (const TetrominoCreator *creator: m_creators)
+	{
+		delete creator;
+	}
+
 	delete m_currentTetromino;
 }
 
@@ -67,7 +85,8 @@ void GameModel::Update(const float deltaTime)
 
 		delete m_currentTetromino;
 
-		m_currentTetromino = new JTetromino(Vec2d(m_size.x / 2, 0));
+		m_currentTetromino = m_creators.front()->Create();
+		std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
 
 		m_lines += m_well.CleanFilledLines();
 	}
