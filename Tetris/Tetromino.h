@@ -32,7 +32,7 @@ public:
 
 	inline void IncreaseVelocity()
 	{
-		m_downVelocity = 15.f;
+		m_downVelocity = 25.f;
 	}
 
 	void MoveLeft();
@@ -45,7 +45,7 @@ public:
 
 protected:
 	float m_rotationAngle = 1.57f;
-	float m_downVelocity = 1.5f;
+	float m_downVelocity = 2.f;
 	float m_realY = 0.f;
 
 private:

@@ -1,6 +1,10 @@
 #include "GameModel.h"
 #include <algorithm>
 
+#define SCORE_DECREASE_SPEED 2.5f
+#define POINTS_PER_LINE		 100.f
+#define FACTOR_INCREASE_STEP 0.5f
+
 GameModel::GameModel(const int w, const int h)
 	: m_size(w, h),
 	m_well(Vec2d(w, h)),
@@ -70,12 +74,14 @@ void GameModel::KeyHandler(const Key & key)
 
 void GameModel::Update(const float deltaTime)
 {
-	if (MotionIsValid([this, deltaTime](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
-		int newBrickY = GetCurrentTetromino()->GetRealY() + GetCurrentTetromino()->GetDownVelocity() * deltaTime;
+	float &factor = m_factor;
+	if (MotionIsValid([this, deltaTime, factor](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
+		int newBrickY = GetCurrentTetromino()->GetRealY() + GetCurrentTetromino()->GetDownVelocity() * deltaTime * factor;
 		newBricksPositions.push_back(brick + Vec2d(0, newBrickY));
 	}) == true)
 	{
-		m_currentTetromino->MoveDown(deltaTime);
+		m_currentTetromino->MoveDown(deltaTime * factor);
+		m_score -= m_score > 0 ? SCORE_DECREASE_SPEED * deltaTime : 0.f;
 	}
 	else 
 	{
@@ -90,7 +96,15 @@ void GameModel::Update(const float deltaTime)
 		m_nextTetromino = m_creators.front()->Create();
 		std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
 
-		m_lines += m_well.CleanFilledLines();
+		int lines = m_well.CleanFilledLines();
+		
+		m_lines += lines;
+		m_score += lines * POINTS_PER_LINE;
+		if (m_lines != 0 && m_lines % m_size.x == 0 && m_level <= m_size.x)
+		{
+			m_factor += FACTOR_INCREASE_STEP;
+			++m_level;
+		}
 	}
 }
 

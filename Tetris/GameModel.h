@@ -60,6 +60,7 @@ private:
 	Tetromino *m_nextTetromino = nullptr;
 
 	float m_score = 0.f;
+	float m_factor = 1.f;
 	int m_level = 1;
 	int m_lines = 0;
 };
