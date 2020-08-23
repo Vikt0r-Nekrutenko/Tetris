@@ -38,7 +38,8 @@ struct Vec2d
 		float newX = noOffset.x * c - noOffset.y * s;
 		float newY = noOffset.x * s + noOffset.y * c;
 
-		return Vec2d(noOffset.x + int(std::lround(newX)), noOffset.y + int(std::lround(newY)));
+		return Vec2d(origin.x + int(std::lround(newX)), 
+					 origin.y + int(std::lround(newY)));
 	}
 };
 

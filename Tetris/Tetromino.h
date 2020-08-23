@@ -15,6 +15,11 @@ public:
 		return m_bricks;
 	}
 
+	inline float GetRotationAngle() const
+	{
+		return m_rotationAngle;
+	}
+
 	void MoveLeft()
 	{
 		for (Vec2d &brick : m_bricks)
@@ -30,6 +35,17 @@ public:
 			brick.x++;
 		}
 	}
+
+	virtual void Rotate(const Vec2d &origin)
+	{
+		for (Vec2d &brick : m_bricks)
+		{
+			brick = brick.Rotate(origin, m_rotationAngle);
+		}
+	}
+protected:
+	float m_rotationAngle = 1.57f;
+
 private:
 	std::vector<Vec2d> m_bricks;
 };
