@@ -33,8 +33,9 @@ public:
 	virtual void Show(BaseApp *app) const;
 	virtual void Clear(BaseApp *app) const;
 
+	virtual State KeyHandler(const Key &key) = 0;
+
 	void ShowText(const int x, const int y, const std::wstring &text, BaseApp *app) const;
-	virtual State KeyHandler(const Key &key) { return State::NONE; };
 protected:
 	const int m_width;
 	const int m_height;

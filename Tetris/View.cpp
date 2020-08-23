@@ -15,7 +15,7 @@ void View::Show(BaseApp * app) const
 	{
 		for (int x = 0; x < m_width; ++x)
 		{
-			if (x == 0 || x == m_width - 1 || y == 0 || y == m_width - 1)
+			if (x == 0 || x == m_width - 1 || y == 0 || y == m_height - 1)
 			{
 				app->SetChar(x, y, wchar_t(Particle::BORDER));
 			}

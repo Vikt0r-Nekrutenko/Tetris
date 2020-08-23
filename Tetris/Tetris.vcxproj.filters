@@ -26,6 +26,12 @@
     <ClCompile Include="MenuView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -44,6 +50,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Keys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

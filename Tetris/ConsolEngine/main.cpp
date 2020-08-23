@@ -1,18 +1,20 @@
 // Copyright 2009-2014 Blam Games, Inc. All Rights Reserved.
 
 #include "TestApp.h"
-#include "../View.h"
+#include "../GameView.h"
 #include "../MenuView.h"
+#include "../GameModel.h"
 #include <conio.h>
 
 class GameApp : public BaseApp
 {
 public:
-	GameApp(const int w, const int h) 
-		: BaseApp(w, h), 
-		m_view(w, h),
-		m_menu(w, h),
-		m_currentView(&m_menu)
+	GameApp(const int w, const int h)
+		: BaseApp(w, h),
+		m_model(15, h - 2),
+		m_gameView(&m_model, w, h),
+		m_menuView(w, h),
+		m_currentView(&m_menuView)
 	{
 		CONSOLE_SCREEN_BUFFER_INFOEX csbiex;
 		csbiex.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
@@ -43,25 +45,26 @@ public:
 			
 			break;
 		case State::NEW_GAME:
-			m_currentView = &m_view;
+			m_currentView = &m_gameView;
 			break;
 		case State::EXIT:
 			exit(0);
 			break;
 		case State::PAUSE:
-			m_currentView = &m_menu;
+			m_currentView = &m_menuView;
 			break;
 		}
 	}
 
 private:
-	View m_view;
-	MenuView m_menu;
+	GameModel m_model;
+	GameView m_gameView;
+	MenuView m_menuView;
 	View* m_currentView;
 };
 
 void main ()
 {
-	GameApp app(25, 25);
+	GameApp app(25, 26);
 	app.Run();
 }
