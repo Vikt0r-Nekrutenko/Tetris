@@ -5,6 +5,7 @@
 #include "../MenuView.h"
 #include "../GameModel.h"
 #include "../Vec2d.h"
+#include "../EndView.h"
 #include <conio.h>
 
 class GameApp : public BaseApp
@@ -15,6 +16,7 @@ public:
 		m_model(15, h - 2),
 		m_gameView(&m_model, w, h),
 		m_menuView(w, h),
+		m_endView(&m_model, w, h),
 		m_currentView(&m_menuView)
 	{
 		CONSOLE_SCREEN_BUFFER_INFOEX csbiex;
@@ -30,7 +32,7 @@ public:
 		m_currentView->Clear(this);
 		if (m_currentView->Update(deltaTime) == State::END)
 		{
-			m_currentView = &m_menuView;
+			m_currentView = &m_endView;
 		}
 		m_currentView->Show(this);
 	}
@@ -66,6 +68,7 @@ private:
 	GameModel m_model;
 	GameView m_gameView;
 	MenuView m_menuView;
+	EndView m_endView;
 	View* m_currentView;
 };
 

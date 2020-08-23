@@ -34,6 +34,11 @@ void View::Clear(BaseApp * app) const
 	}
 }
 
+State View::Update(const float deltaTime)
+{
+	return State::NONE;
+}
+
 void View::ShowText(const int x, const int y, const std::wstring & text, BaseApp * app) const
 {
 	for (size_t i = 0; i < text.length(); ++i)

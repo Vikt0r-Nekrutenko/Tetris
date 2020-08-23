@@ -146,6 +146,7 @@
     <ClCompile Include="ConsolEngine\BaseApp.cpp" />
     <ClCompile Include="ConsolEngine\main.cpp" />
     <ClCompile Include="ConsolEngine\TestApp.cpp" />
+    <ClCompile Include="EndView.cpp" />
     <ClCompile Include="GameModel.cpp" />
     <ClCompile Include="GameView.cpp" />
     <ClCompile Include="MenuView.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="ConsolEngine\BaseApp.h" />
     <ClInclude Include="ConsolEngine\PerformanceCounter.h" />
     <ClInclude Include="ConsolEngine\TestApp.h" />
+    <ClInclude Include="EndView.h" />
     <ClInclude Include="GameModel.h" />
     <ClInclude Include="GameView.h" />
     <ClInclude Include="Keys.h" />
