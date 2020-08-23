@@ -52,6 +52,12 @@ private:
 	std::vector<Vec2d> m_bricks;
 };
 
+class NotSymmetricalTetromino : public Tetromino
+{
+public:
+	NotSymmetricalTetromino(const Vec2d &b1, const Vec2d &b2, const Vec2d &b3, const Vec2d &b4);
+	void Rotate(const Vec2d &origin) override;
+};
 
 class JTetromino : public Tetromino
 {
@@ -65,7 +71,7 @@ public:
 	LTetromino(const Vec2d &offset);
 };
 
-class ITetromino : public Tetromino
+class ITetromino : public NotSymmetricalTetromino
 {
 public:
 	ITetromino(const Vec2d &offset);
@@ -77,19 +83,20 @@ public:
 	TTetromino(const Vec2d &offset);
 };
 
-class OTetromino : public Tetromino
+class OTetromino : public NotSymmetricalTetromino
 {
 public:
 	OTetromino(const Vec2d &offset);
+	void Rotate(const Vec2d &origin) final { }
 };
 
-class ZTetromino : public Tetromino
+class ZTetromino : public NotSymmetricalTetromino
 {
 public:
 	ZTetromino(const Vec2d &offset);
 };
 
-class STetromino : public Tetromino
+class STetromino : public NotSymmetricalTetromino
 {
 public:
 	STetromino(const Vec2d &offset);
