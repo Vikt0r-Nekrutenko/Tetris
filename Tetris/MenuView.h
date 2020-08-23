@@ -10,7 +10,7 @@ public:
 
 	void Show(BaseApp *app) const final;
 	State KeyHandler(const Key &key) final;
-	void Update(const float deltaTime) final { };
+	State Update(const float deltaTime) final;;
 private:
 	std::vector<std::wstring> m_items;
 	int m_selector = 0;

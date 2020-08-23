@@ -51,3 +51,8 @@ State MenuView::KeyHandler(const Key & key)
 	}
 	return State::NONE;
 }
+
+State MenuView::Update(const float deltaTime) 
+{ 
+	return State::NONE; 
+}

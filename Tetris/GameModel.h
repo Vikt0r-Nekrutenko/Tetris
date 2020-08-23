@@ -3,6 +3,7 @@
 #include "TetrominoCreator.h"
 #include "Keys.h"
 #include "Well.h"
+#include "View.h"
 
 #include <random>
 
@@ -43,10 +44,11 @@ public:
 	{
 		return m_well;
 	}
+	void ResetModel();
 
 	void KeyHandler(const Key &key);
 
-	void Update(const float deltaTime);
+	State Update(const float deltaTime);
 private:
 	bool MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
 

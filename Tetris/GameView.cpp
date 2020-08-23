@@ -89,7 +89,7 @@ State GameView::KeyHandler(const Key & key)
 	return State::NONE;
 }
 
-void GameView::Update(const float deltaTime)
+State GameView::Update(const float deltaTime)
 {
-	m_model->Update(deltaTime);
+	return m_model->Update(deltaTime);
 }

@@ -20,6 +20,7 @@ enum class State
 	NEW_GAME = 0x01,
 	EXIT	 = 0x02,
 	PAUSE	 = 0x03,
+	END		 = 0x04
 };
 
 class BaseApp;
@@ -33,7 +34,7 @@ public:
 	virtual void Show(BaseApp *app) const;
 	virtual void Clear(BaseApp *app) const;
 
-	virtual void Update(const float deltaTime) = 0;
+	virtual State Update(const float deltaTime) = 0;
 	virtual State KeyHandler(const Key &key) = 0;
 
 	void ShowText(const int x, const int y, const std::wstring &text, BaseApp *app) const;

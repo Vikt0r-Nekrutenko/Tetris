@@ -28,7 +28,10 @@ public:
 	void UpdateF(float deltaTime) final
 	{
 		m_currentView->Clear(this);
-		m_currentView->Update(deltaTime);
+		if (m_currentView->Update(deltaTime) == State::END)
+		{
+			m_currentView = &m_menuView;
+		}
 		m_currentView->Show(this);
 	}
 
@@ -44,9 +47,10 @@ public:
 		switch (state)
 		{
 		case State::CONTINUE:
-			
+			m_currentView = &m_gameView;
 			break;
 		case State::NEW_GAME:
+			m_model.ResetModel();
 			m_currentView = &m_gameView;
 			break;
 		case State::EXIT:

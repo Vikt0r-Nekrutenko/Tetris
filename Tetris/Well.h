@@ -15,8 +15,10 @@ public:
 		return m_bricks;
 	}
 
+	void Clear();
 	void PlaceBrick(const Vec2d &brick);
 	int CleanFilledLines();
+	bool IsFull() const;
 private:
 	std::list<Vec2d> m_bricks;
 };

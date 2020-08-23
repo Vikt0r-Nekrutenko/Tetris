@@ -35,6 +35,13 @@ GameModel::~GameModel()
 	delete m_currentTetromino;
 }
 
+void GameModel::ResetModel()
+{
+	m_well.Clear();
+	m_score = m_lines = 0;
+	m_level = m_factor = 1;
+}
+
 void GameModel::KeyHandler(const Key & key)
 {
 	switch (key)
@@ -72,7 +79,7 @@ void GameModel::KeyHandler(const Key & key)
 	}
 }
 
-void GameModel::Update(const float deltaTime)
+State GameModel::Update(const float deltaTime)
 {
 	float &factor = m_factor;
 	if (MotionIsValid([this, deltaTime, factor](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
@@ -88,6 +95,12 @@ void GameModel::Update(const float deltaTime)
 		for (const Vec2d &brick : m_currentTetromino->GetBricks())
 		{
 			m_well.PlaceBrick(brick);
+		}
+
+		if (m_well.IsFull() == true)
+		{
+			ResetModel();
+			return State::END;
 		}
 
 		delete m_currentTetromino;
@@ -106,6 +119,7 @@ void GameModel::Update(const float deltaTime)
 			++m_level;
 		}
 	}
+	return State::NONE;
 }
 
 bool GameModel::MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const

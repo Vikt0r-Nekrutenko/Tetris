@@ -6,6 +6,11 @@ Well::Well(const Vec2d size)
 
 }
 
+void Well::Clear()
+{
+	m_bricks.clear();
+}
+
 void Well::PlaceBrick(const Vec2d & brick)
 {
 	m_bricks.push_back(Vec2d(brick));
@@ -47,5 +52,17 @@ int Well::CleanFilledLines()
 		}
 	}
 	return cleanLines;
+}
+
+bool Well::IsFull() const
+{
+	for (const Vec2d &brick : m_bricks)
+	{
+		if (brick.y == 0)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
