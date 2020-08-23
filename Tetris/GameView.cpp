@@ -74,3 +74,8 @@ State GameView::KeyHandler(const Key & key)
 	m_model->KeyHandler(key);
 	return State::NONE;
 }
+
+void GameView::Update(const float deltaTime)
+{
+	m_model->Update(deltaTime);
+}

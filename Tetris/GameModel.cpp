@@ -3,7 +3,7 @@
 GameModel::GameModel(const int w, const int h)
 	: m_size(w, h)
 {
-	m_currentTetromino = new JTetromino(Vec2d(w / 2, 2));
+	m_currentTetromino = new JTetromino(Vec2d(w / 2, 0));
 }
 
 GameModel::~GameModel()
@@ -41,6 +41,17 @@ void GameModel::KeyHandler(const Key & key)
 			m_currentTetromino->Rotate(m_currentTetromino->GetBricks().at(1));
 		}
 		break;
+	}
+}
+
+void GameModel::Update(const float deltaTime)
+{
+	if (MotionIsValid([this, deltaTime](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick) {
+		int newBrickY = GetCurrentTetromino()->GetRealY() + GetCurrentTetromino()->GetDownVelocity() * deltaTime;
+		newBricksPositions.push_back(brick + Vec2d(0, newBrickY));
+	}) == true)
+	{
+		m_currentTetromino->MoveDown(deltaTime);
 	}
 }
 

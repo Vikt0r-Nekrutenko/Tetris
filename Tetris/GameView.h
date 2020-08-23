@@ -13,6 +13,7 @@ public:
 	void Clear(BaseApp *app) const final;
 
 	State KeyHandler(const Key &key) final;
+	void Update(const float deltaTime) final;
 	
 private:
 	GameModel *m_model;

@@ -28,6 +28,7 @@ public:
 	void UpdateF(float deltaTime) final
 	{
 		m_currentView->Clear(this);
+		m_currentView->Update(deltaTime);
 		m_currentView->Show(this);
 	}
 

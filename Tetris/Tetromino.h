@@ -20,6 +20,16 @@ public:
 		return m_rotationAngle;
 	}
 
+	inline float GetDownVelocity() const
+	{
+		return m_downVelocity;
+	}
+
+	inline float GetRealY() const
+	{
+		return m_realY;
+	}
+
 	void MoveLeft()
 	{
 		for (Vec2d &brick : m_bricks)
@@ -36,6 +46,20 @@ public:
 		}
 	}
 
+	void MoveDown(const float deltaTime)
+	{
+		m_realY += m_downVelocity * deltaTime;
+
+		if (m_realY >= 1.f)
+		{
+			for (Vec2d &brick : m_bricks)
+			{
+				brick.y++;
+			}
+			m_realY = 0.f;
+		}
+	}
+
 	virtual void Rotate(const Vec2d &origin)
 	{
 		for (Vec2d &brick : m_bricks)
@@ -45,6 +69,8 @@ public:
 	}
 protected:
 	float m_rotationAngle = 1.57f;
+	float m_downVelocity = 1.5f;
+	float m_realY = 0.f;
 
 private:
 	std::vector<Vec2d> m_bricks;

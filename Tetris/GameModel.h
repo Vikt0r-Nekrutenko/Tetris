@@ -32,6 +32,8 @@ public:
 	}
 
 	void KeyHandler(const Key &key);
+
+	void Update(const float deltaTime);
 private:
 	bool MotionIsValid(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
 

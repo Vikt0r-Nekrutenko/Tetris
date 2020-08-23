@@ -33,6 +33,7 @@ public:
 	virtual void Show(BaseApp *app) const;
 	virtual void Clear(BaseApp *app) const;
 
+	virtual void Update(const float deltaTime) = 0;
 	virtual State KeyHandler(const Key &key) = 0;
 
 	void ShowText(const int x, const int y, const std::wstring &text, BaseApp *app) const;
