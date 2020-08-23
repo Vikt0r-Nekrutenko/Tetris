@@ -58,5 +58,8 @@
     <ClInclude Include="GameModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vec2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

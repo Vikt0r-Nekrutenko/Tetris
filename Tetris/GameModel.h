@@ -23,8 +23,8 @@ public:
 		return m_lines;
 	}
 private:
-	float m_score = 12002;
-	int m_level = 12;
-	int m_lines = 112;
+	float m_score = 0.f;
+	int m_level = 1;
+	int m_lines = 1;
 };
 

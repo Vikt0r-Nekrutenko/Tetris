@@ -159,6 +159,7 @@
     <ClInclude Include="GameView.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="MenuView.h" />
+    <ClInclude Include="Vec2d.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
