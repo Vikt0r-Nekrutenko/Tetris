@@ -30,11 +30,6 @@ public:
 		return m_realY;
 	}
 
-	inline void IncreaseVelocity()
-	{
-		m_downVelocity = 25.f;
-	}
-
 	void MoveLeft();
 
 	void MoveRight();

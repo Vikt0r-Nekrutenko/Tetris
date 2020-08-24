@@ -44,12 +44,14 @@ public:
 	{
 		return m_well;
 	}
+
 	void ResetModel();
 
 	void KeyHandler(const Key &key);
 
 	State Update(const float deltaTime);
 private:
+	State MoveImpossibleHandler();
 	bool MoveIsPossible(std::function<void(std::vector<Vec2d> &, const Vec2d &)> motionFunction) const;
 
 	std::vector<const TetrominoCreator *> m_creators;
@@ -65,5 +67,6 @@ private:
 	float m_factor = 1.f;
 	int m_level = 1;
 	int m_lines = 0;
+	int m_linesOnLvl = 0;
 };
 

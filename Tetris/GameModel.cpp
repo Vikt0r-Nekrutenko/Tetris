@@ -3,7 +3,9 @@
 
 #define SCORE_DECREASE_SPEED 2.5f
 #define POINTS_PER_LINE		 100.f
-#define FACTOR_INCREASE_STEP 0.5f
+#define FACTOR_INCREASE_STEP 0.25f
+#define LEVELS_NUM			 10
+#define LINES_PER_LVL		 10
 
 GameModel::GameModel(const int w, const int h)
 	: m_size(w, h),
@@ -37,9 +39,16 @@ GameModel::~GameModel()
 
 void GameModel::ResetModel()
 {
+	delete m_currentTetromino;
+	delete m_nextTetromino;
+	
 	m_well.Clear();
 	m_score = m_lines = 0;
 	m_level = m_factor = 1;
+
+	std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
+	m_currentTetromino = m_creators.back()->Create();
+	m_nextTetromino = m_creators.front()->Create();
 }
 
 void GameModel::KeyHandler(const Key & key)
@@ -66,9 +75,21 @@ void GameModel::KeyHandler(const Key & key)
 		}
 		break;
 
-	case Key::DOWN:
-		m_currentTetromino->IncreaseVelocity();
+	case Key::DOWN: 
+	{
+		int newBrickY = m_currentTetromino->GetRealY() + m_currentTetromino->GetDownVelocity() * .5f;
+		do 
+		{
+			m_currentTetromino->MoveDown(.5f);
+		}
+		
+		while (MoveIsPossible([newBrickY](std::vector<Vec2d> &newBricksPositions, const Vec2d &brick)
+		{
+			newBricksPositions.push_back(brick + Vec2d(0, newBrickY));
+		}) == true);
+		MoveImpossibleHandler();
 		break;
+	}
 
 	case Key::SPACE:
 		const Vec2d origin = m_currentTetromino->GetBricks().at(1);
@@ -97,32 +118,40 @@ State GameModel::Update(const float deltaTime)
 	}
 	else 
 	{
-		for (const Vec2d &brick : m_currentTetromino->GetBricks())
-		{
-			m_well.PlaceBrick(brick);
-		}
+		return MoveImpossibleHandler();
+	}
+	return State::NONE;
+}
 
-		if (m_well.IsFull() == true)
-		{
-			ResetModel();
-			return State::END;
-		}
+State GameModel::MoveImpossibleHandler()
+{
+	for (const Vec2d &brick : m_currentTetromino->GetBricks())
+	{
+		m_well.PlaceBrick(brick);
+	}
 
-		delete m_currentTetromino;
+	if (m_well.IsFull() == true)
+	{
+		ResetModel();
+		return State::END;
+	}
 
-		m_currentTetromino = std::move(m_nextTetromino); 
-		m_nextTetromino = m_creators.front()->Create();
-		std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
+	delete m_currentTetromino;
 
-		int lines = m_well.CleanFilledLines();
-		
-		m_lines += lines;
-		m_score += lines * POINTS_PER_LINE;
-		if (m_lines != 0 && m_lines % m_size.x == 0 && m_level <= m_size.x)
-		{
-			m_factor += FACTOR_INCREASE_STEP;
-			++m_level;
-		}
+	m_currentTetromino = std::move(m_nextTetromino);
+	m_nextTetromino = m_creators.front()->Create();
+	std::shuffle(m_creators.begin(), m_creators.end(), m_engine);
+
+	int lines = m_well.CleanFilledLines();
+
+	m_lines += lines;
+	m_linesOnLvl += lines;
+	m_score += lines * POINTS_PER_LINE;
+	if (m_linesOnLvl >= LINES_PER_LVL && m_level <= LEVELS_NUM)
+	{
+		m_factor += FACTOR_INCREASE_STEP;
+		++m_level;
+		m_linesOnLvl = 0;
 	}
 	return State::NONE;
 }
