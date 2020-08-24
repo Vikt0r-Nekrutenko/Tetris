@@ -27,5 +27,6 @@ void EndView::Show(BaseApp * app) const
 
 State EndView::KeyHandler(const Key & key)
 {
+	m_model->ResetModel();
 	return State::PAUSE;
 }

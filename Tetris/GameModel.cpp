@@ -132,7 +132,6 @@ State GameModel::MoveImpossibleHandler()
 
 	if (m_well.IsFull() == true)
 	{
-		ResetModel();
 		return State::END;
 	}
 
