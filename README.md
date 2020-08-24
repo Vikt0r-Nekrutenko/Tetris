@@ -7,4 +7,5 @@
 :arrow_left: - move left<br>
 :arrow_right: - move right<br>
 :arrow_down: - drop<br>
+Space - rotate<br>
 ESC - pause<br>
